@@ -24,11 +24,11 @@ def get_device_monitor_data(input_data):
             # print(xn, yn)
             device.append(xn)
             device.append(yn)
-            print(num_device)
-            print(input_data[num_device])
-            print(input_data[num_device].get('value'))
+            # print(num_device)
+            # print(input_data[num_device])
+            # print(input_data[num_device].get('value'))
             device.append(
-                '设备名称：' + input_data[num_device].get('name') + '<br> 资产编号：' + input_data[num_device].get('device_code'))
+                u'设备名称：' + input_data[num_device].get('name') + u'<br> 资产编号：' + input_data[num_device].get('device_code'))
             if input_data[num_device].get('value') == "0":
                 device_running_list.append(device)
             elif input_data[num_device].get('value') == "1":
@@ -38,7 +38,7 @@ def get_device_monitor_data(input_data):
             elif input_data[num_device].get('value') == "3":
                 device_no_use_list.append(device)
             else:
-                print("aaaa")
+                print("do nothing")
             num_device += 1
             if num_device >= len(input_data):
                 return [device_running_list, device_standby_list, device_shutdown_list, device_no_use_list]
