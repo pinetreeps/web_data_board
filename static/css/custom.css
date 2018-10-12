@@ -2,6 +2,8 @@
 -------------------------------------------------- */
 
 body {
+    font-family:"Microsoft YaHei",微软雅黑, Sans-serif;
+    font-weight: lighter;
     background-color: #1c4a6c;
 }
 
@@ -14,3 +16,27 @@ body {
     text-align: left;
     background-color: #000000;
     }
+
+#demo i {
+    background: no-repeat top left;
+    display:inline-block; height:60px;
+    line-height:60px;
+    margin:0 auto 10px auto;
+    font-size:40px;
+    padding-left:120px;
+    font-style:normal;
+    text-align:center;
+    font-weight:lighter;
+    color: #5acde2;
+    }
+
+#demo p {
+    padding-left:50px;
+    color: #5acde2;
+    }
+#demo i.icon-xiaoyu { background-image:url(../images/leoweather/xiaoyu.png); }
+#demo i.icon-zhongyu { background-image:url(../images/leoweather/zhongyu.png); }
+#demo i.icon-dayu { background-image:url(../images/leoweather/dayu.png); }
+#demo i.icon-qing { background-image:url(../images/leoweather/qing.png); }
+#demo i.icon-duoyun { background-image:url(../images/leoweather/duoyun.png); }
+#demo i.icon-yin { background-image:url(../images/leoweather/yin.png); }

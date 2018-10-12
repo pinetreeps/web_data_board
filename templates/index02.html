@@ -1,31 +1,37 @@
 {% extends "base1.html" %}
 {% block page_content %}
     <div class="col-sm-12">
+        <!--左边栏 两个柱状图 -->
         <div id="bar" class="col-sm-3" style="height: 890px">
-            <!--左边栏 两个柱状图 -->
             <div id="bar1" class="col-sm-12" style="height: 445px"></div>
             <div id="bar2" class="col-sm-12" style="height: 445px"></div>
         </div>
-        <div class="col-sm-6" style="height: 890px">
-            <!--中间区域 标题、地图、时间、监控覆盖率、设备使用率 -->
+        <!--中间区域 标题、地图、时间、监控覆盖率、设备使用率 -->
+        <div class="col-sm-6" style="height: 890px; background-color:#17405f">
             <div class="col-sm-12" style="height: 60px">
-                <h2 class="text-center" style="color: #5acde2; font-family: Sans-serif" >中国检验检疫科学研究院大型科研仪器动态监控系统</h2>
+                <h2 class="text-center" style="color: #5acde2; font-weight: lighter" >中国检验检疫科学研究院大型科研仪器动态监控系统</h2>
+                <!--<h2 class="text-center" style="color: #5acde2;" >DATA MONITOR VIEW BOARD</h2>-->
             </div>
             <div id="chinaMap" class="col-sm-12" style="height: 700px"></div>
-            <div class="col-sm-12" style="height: 60px">
-                <div class="col-sm-3" style="height: 60px">
-                    <h4 class="text-center" style="color: #5acde2" >监控覆盖率</h4>
-                    <h1 class="text-center" style="color: #5acde2; font-family: Microsoft YaHei Light,Sans-serif" >45%</h1>
+            <div class="col-sm-12">
+                <div class="col-sm-2" style="height: 60px">
+                    <h5 class="text-center" style="color: #5acde2; font-weight: lighter">监控覆盖率</h5>
+                    <h1 class="text-center" style="color: #5acde2; font-weight: lighter" >45%</h1>
                 </div>
-                <div class="col-sm-4" style="height: 60px">
-                    <h4 class="text-center" style="color: #5acde2" >设备使用率</h4>
-                    <h1 class="text-center" style="color: #5acde2; font-family: Microsoft YaHei Light,Sans-serif" >45%</h1>
+                <div class="col-sm-2" style="height: 60px">
+                    <h5 class="text-center" style="color: #5acde2; font-weight: lighter" >设备使用率</h5>
+                    <h1 class="text-center" style="color: #5acde2; font-weight: lighter" >45%</h1>
                 </div>
-                <div class="col-sm-5" style="height: 60px">
-                    <h4 class="text-center" style="color: #5acde2" >2018年9月19日</h4>
-                    <h1 class="text-center" style="color: #5acde2; font-family: Microsoft YaHei Light,Sans-serif" >17:09</h1>
+                <div class="col-sm-4" style="height: 60px" onload="startTime()">
+                <!--<div class="col-sm-8" style="height: 60px">-->
+                    <h5 id="nowDate" class="text-center" style="color: #5acde2; font-weight: lighter" ></h5>
+                    <h1 id="nowTime" class="text-center" style="color: #5acde2; font-weight: lighter" ></h1>
+                </div>
+                <div class="col-sm-4">
+                    <div id="demo" style="color: #5acde2; font-weight: lighter"></div>
                 </div>
             </div>
+
         </div>
         <div id="bar" class="col-sm-3" style="height: 890px">
             <!--右边栏 散点图、饼图 -->
@@ -39,9 +45,46 @@
     {{ super() }}
     <script src='/static/js/jquery.js'></script>
     <!--<script src='/static/js/jquery.dataTables.min.js'></script>-->
+    <!--<script src="/static/js/jquery.min.js"></script>-->
+    <script src="/static/js/jquery.leoweather.min.js"></script>
     <script src='/static/js/echarts.min.js'></script>
     <script src='/static/js/china1.js'></script>
+    <script type='text/javascript'>$('#demo').leoweather({format:'<i class="icon-{图标}">{气温}℃</i><p>{城市}<span> </span>{天气}<span> </span>{风向}{风级}级</p>'});</script>
 
+    <script language="JavaScript">
+        function startTime(){
+            var today=new Date();//定义日期对象
+            var yyyy = today.getFullYear();//通过日期对象的getFullYear()方法返回年
+            var MM = today.getMonth()+1;//通过日期对象的getMonth()方法返回年月
+            var dd = today.getDate();//通过日期对象的getDate()方法返回日期
+            var hh=today.getHours();//通过日期对象的getHours方法返回小时
+            var mm=today.getMinutes();//通过日期对象的getMinutes方法返回分钟
+            var ss=today.getSeconds();//通过日期对象的getSeconds方法返回秒
+            // 如果分钟或小时的值小于10，则在其值前加0，比如如果时间是下午3点20分9秒的话，则显示15：20：09
+            MM=checkTime(MM);
+            dd=checkTime(dd);
+            mm=checkTime(mm);
+            ss=checkTime(ss);
+            var day; //用于保存星期（getDay()方法得到星期编号）
+            if(today.getDay()==0)   day   =   "星期日 " ;
+            if(today.getDay()==1)   day   =   "星期一 " ;
+            if(today.getDay()==2)   day   =   "星期二 " ;
+            if(today.getDay()==3)   day   =   "星期三 " ;
+            if(today.getDay()==4)   day   =   "星期四 " ;
+            if(today.getDay()==5)   day   =   "星期五 " ;
+            if(today.getDay()==6)   day   =   "星期六 " ;
+            document.getElementById('nowDate').innerHTML=yyyy+"年"+MM +"月"+ dd +"日 " + day;
+            document.getElementById('nowTime').innerHTML=hh + ":" + mm + ":" + ss;
+        }
+        function checkTime(i){
+
+            if (i<10){
+                i="0" + i;
+            }
+            return i;
+        }
+        setInterval(startTime,1000);//每一秒中重新加载startTime()方法
+    </script>
 
     <script type='text/javascript'>
             option = {
@@ -73,11 +116,7 @@
                     type: 'pie',
                     radius :['50%', '70%'],
                     center: ['50%', '50%'],
-                    data:[
-                        {value:335, name:'部门1'},
-                        {value:310, name:'部门2'},
-                        {value:234, name:'部门3'},
-                    ],
+                    data:[{% for date in pie_data %} {value:{{date[0]}}, name:'{{date[1]}}'}, {% endfor %}],
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,
@@ -95,10 +134,16 @@
     <script type='text/javascript'>
         var xx = ['x0', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6','x7','x8','x9','x0', 'x1', 'x2', 'x3', 'x4', 'x5','x6','x7','x8','x9'];
         var yy = ['y0', 'y1', 'y2','y3', 'y4', 'y5', 'y6','y7','y8','y9','y0', 'y1', 'y2','y3', 'y4', 'y5', 'y6','y7','y8','y9','y0', 'y1', 'y2','y3'];
-        var data = [[0,4,'设备名称：设备1 <br> 资产编号：ABC123'],[3,3,1],[2,6,1],[5,7,1],[0,8,1],[15,9,2]];
-        var data1 = [[0,0,'设备名称：设备1 <br> 资产编号：ABC123'],[0,1,'设备2'],[0,2,'设备3'],[0,23,'设备4']];
-        var data2 = [[1,1,'设备名称：设备1 <br> 资产编号：ABC123'],[3,2,20],[6,3,20]];
-        var data3 = [[12,19,'设备名称：设备1 <br> 资产编号：ABC123'],[12,22,20],[12,23,20]];
+        // var data = [[0,4,'设备名称：设备1 <br> 资产编号：ABC123'],[3,3,1],[2,6,1],[5,7,1],[0,8,1],[15,9,2]];
+        // var data1 = [[0,0,'设备名称：设备1 <br> 资产编号：ABC123'],[0,1,'设备2'],[0,2,'设备3'],[0,23,'设备4']];
+        // var data2 = [[1,1,'设备名称：设备1 <br> 资产编号：ABC123'],[3,2,20],[6,3,20]];
+        // var data3 = [[12,19,'设备名称：设备1 <br> 资产编号：ABC123'],[12,22,20],[12,23,20]];
+
+        var data  = [{% for date in device_monitor_data[0] %} [{{date[0]}},{{date[1]}},{{date[2]|tojson}}], {% endfor %}];
+        var data1 = [{% for date in device_monitor_data[1] %} [{{date[0]}},{{date[1]}},{{date[2]|tojson}}], {% endfor %}];
+        var data2 = [{% for date in device_monitor_data[2] %} [{{date[0]}},{{date[1]}},{{date[2]|tojson}}], {% endfor %}];
+        var data3 = [{% for date in device_monitor_data[3] %} [{{date[0]}},{{date[1]}},{{date[2]|tojson}}], {% endfor %}];
+
         option = {
             title : {
                 text: '设备运行情况',
@@ -235,7 +280,7 @@
     <script type='text/javascript'>
         option = {
             title: {
-                text: '监控覆盖率 平均设备使用率',
+                text: '监控覆盖率 vs 平均设备使用率',
                 textStyle: {//标题颜色
                         color: '#5acde2',
                 　　　　 fontSize:14
@@ -280,13 +325,13 @@
                         color: '#5acde2'
                     }
                 },
-                data: ['食品所','植检所','动检所','卫检所','工业品所','化学品所','装备所','农产品中心','综合检测中心','测试评价中心','化妆品中心','HACCP中心']
+                data: [{% for date in department_name %} '{{date}}', {% endfor %}]
             },
             series: [
                 {
                     name: '监控覆盖率',
                     type: 'bar',
-                    data: [23, 89, 34, 70, 44, 63, 67, 77, 88, 90, 12, 83],
+                    data: [{% for date in monitoring_coverage_rate %} {{date}}, {% endfor %}],
                     itemStyle:{
                         normal:{
                             label: {
@@ -300,7 +345,7 @@
                 {
                     name: '平均设备使用率',
                     type: 'bar',
-                    data: [23, 89, 34, 70, 44, 63, 67, 77, 88, 90, 12, 83],
+                    data: [{% for date in avg_device_using_rate %} {{date}}, {% endfor %}],
                     itemStyle:{
                         normal:{
                             label: {
@@ -321,7 +366,7 @@
         <script type='text/javascript'>
         option = {
             title: {
-                text: '年平均运行有效机时 年平均共享服务机时',
+                text: '年平均运行有效机时 vs 年平均共享服务机时',
                 textStyle: {//标题颜色
                         color: '#5acde2',
                 　　　　 fontSize:14
@@ -367,13 +412,13 @@
                         color: '#5acde2'
                     }
                 },
-                data: ['食品所','植检所','动检所','卫检所','工业品所','化学品所','装备所','农产品中心','综合检测中心','测试评价中心','化妆品中心','HACCP中心']
+                data: [{% for date in department_name %} '{{date}}', {% endfor %}]
             },
             series: [
                 {
                     name: '年平均运行有效机时',
                     type: 'bar',
-                    data: [11134, 81119, 31114, 71110, 41114, 61113, 11167, 23477, 9288, 10990, 89012, 23483],
+                    data: [{% for date in running_effective_time_year %} {{date}}, {% endfor %}],
                     itemStyle:{
                         normal:{
                             label: {
@@ -387,7 +432,7 @@
                 {
                     name: '年平均共享服务机时',
                     type: 'bar',
-                    data: [23233, 89456, 13994, 78900, 44467, 64673, 67778, 17743, 88234, 12290, 19212, 80993],
+                    data: [{% for date in shared_service_time_year %} {{date}}, {% endfor %}],
                     itemStyle:{
                         normal:{
                             label: {
