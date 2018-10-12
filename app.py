@@ -25,6 +25,7 @@ def hello_world():
 # @app.route('/test1')
 # def test1():
 #     return render_template('index01.html')
+
 # 读设备取监控（散点图）数据
 device_monitor_data = utils.get_device_monitor_data(config.device_monitor_data)
 
@@ -41,4 +42,7 @@ def test2():
 
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=8090, debug=True)
-    app.run(port=8090,debug=True)
+    # 线上
+    app.run(host='0.0.0.0', port=8097, debug=True)
+    # 本机
+    # app.run(port=8090,debug=True)
