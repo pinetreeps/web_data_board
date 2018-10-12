@@ -116,7 +116,7 @@
                     type: 'pie',
                     radius :['50%', '70%'],
                     center: ['50%', '50%'],
-                    data:[{% for date in pie_data %} {value:{{date[0]}}, name:'{{date[1]}}'}, {% endfor %}],
+                    data:[{% for date in pie_data %} {value:{{date[0]}}, name:{{date[1]|tojson}}}, {% endfor %}],
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,
