@@ -4,6 +4,12 @@
 # python 3.6
 # Date: 2018/10/12
 
+import requests
+import re
+# import sys
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
+
 
 def get_device_monitor_data(input_data):
     xx = ['x0', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9',
@@ -50,10 +56,68 @@ def get_device_monitor_data(input_data):
     # print(device_shutdown_list)
     # print(device_no_use_list)
 
+#  获取网页内容
+def getHTMLtext(url):
+    try:
+        r = requests.get(url, timeout=30)
+        r.raise_for_status()  # 如果状态不是200，引发HTTPError异常
+        r.encoding = r.apparent_encoding  # r.apparent_encoding:根据网页内容分析出的编码方式
+        return r.text
+    except:
+        print("爬取失败")
+        return ("")
 
+def get_weather(city_str):
+    # url = "http://www.weather.com.cn/weather1d/101010100.shtml"
+    url = "http://www.tianqi.com/{}/".format(city_str)
+    # url = "http://qq.ip138.com/weather/beijing/"
+    weather_data = ['气温正常', '多云', '北风']
+
+    whtml = getHTMLtext(url)
+    # print(whtml)
+    #  抓取数据区块的正则
+    # w_info_pattern = re.compile("hour3data=(.*?)</script>", re.S)
+    w_info_pattern = re.compile("<dd class=\"name\"><h2>.*?</div>", re.S)
+    #  使用正则抓取数据区块
+    w_info = w_info_pattern.findall(whtml)
+    # print(w_info)
+    temperature_pattern = re.compile("class=\"now\"><b>(.*?)</b>", re.S)
+    weather_data[0] = temperature_pattern.findall(w_info[0])[0]
+
+    weather_pattern = re.compile("<span><b>(.*?)</b>", re.S)
+    weather_data[1] = weather_pattern.findall(w_info[0])[0]
+
+    wind_pattern = re.compile("<b>风向：(.*?)</b>", re.S)
+    weather_data[2] = wind_pattern.findall(w_info[0])[0]
+    return weather_data
+
+
+def get_weather_img_path(weather_str):
+    if '小雨' == weather_str:
+        return 'static/images/leoweather/xiaoyu.png'
+    elif '大雨' == weather_str:
+        return 'static/images/leoweather/dayu.png'
+    elif '多云' == weather_str:
+        return 'static/images/leoweather/duoyun.png'
+    elif '晴' == weather_str:
+        return 'static/images/leoweather/qing.png'
+    elif '阴' == weather_str:
+        return 'static/images/leoweather/yin.png'
+    elif '中雨' == weather_str:
+        return 'static/images/leoweather/zhongyu.png'
+    else:
+        return 'static/images/leoweather/duoyun.png'
 
 
 if __name__ == '__main__':
+
+    print(get_weather('beijing'))
+
+    exit()
+
+
+
+
 
     data = [[0,4,'设备名称：设备1 <br> 资产编号：ABC123'],[3,3,1],[2,6,1],[5,7,1],[0,8,1],[15,9,2]]
     data1 = [[0,0,'设备名称：设备1 <br> 资产编号：ABC123'],[0,1,'设备2'],[0,2,'设备3'],[0,23,'设备4']]
