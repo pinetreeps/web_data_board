@@ -28,7 +28,15 @@
                     <h1 id="nowTime" class="text-center" style="color: #5acde2; font-weight: lighter" ></h1>
                 </div>
                 <div class="col-sm-4">
-                    <div id="demo" style="color: #5acde2; font-weight: lighter"></div>
+                    <!--天气-->
+                    <div class="col-sm-4">
+                        <!--天气图片-->
+                        <img src="{{weathre_img_path}}" style="width: 80px">
+                    </div>
+                    <div class="col-sm-8">
+                        <h5 style="color: #5acde2; font-weight: lighter; text-align: right">{{weather_data[1]}} {{weather_data[2]}}</h5>
+                        <h1 style="color: #5acde2; font-weight: lighter; text-align: right">{{weather_data[0]}} ℃</h1>
+                    </div>
                 </div>
             </div>
 
@@ -49,7 +57,6 @@
     <script src="/static/js/jquery.leoweather.min.js"></script>
     <script src='/static/js/echarts.min.js'></script>
     <script src='/static/js/china1.js'></script>
-    <script type='text/javascript'>$('#demo').leoweather({format:'<i class="icon-{图标}">{气温}℃</i><p>{城市}<span> </span>{天气}<span> </span>{风向}{风级}级</p>'});</script>
 
     <script language="JavaScript">
         function startTime(){
