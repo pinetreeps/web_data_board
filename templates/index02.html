@@ -16,11 +16,11 @@
             <div class="col-sm-12">
                 <div class="col-sm-2" style="height: 60px">
                     <h5 class="text-center" style="color: #5acde2; font-weight: lighter">监控覆盖率</h5>
-                    <h1 class="text-center" style="color: #5acde2; font-weight: lighter" >45%</h1>
+                    <h1 class="text-center" style="color: #5acde2; font-weight: lighter" >{{center_data[0]}}%</h1>
                 </div>
                 <div class="col-sm-2" style="height: 60px">
                     <h5 class="text-center" style="color: #5acde2; font-weight: lighter" >设备使用率</h5>
-                    <h1 class="text-center" style="color: #5acde2; font-weight: lighter" >45%</h1>
+                    <h1 class="text-center" style="color: #5acde2; font-weight: lighter" >{{center_data[1]}}%</h1>
                 </div>
                 <div class="col-sm-4" style="height: 60px" onload="startTime()">
                 <!--<div class="col-sm-8" style="height: 60px">-->
@@ -57,6 +57,13 @@
     <script src="/static/js/jquery.leoweather.min.js"></script>
     <script src='/static/js/echarts.min.js'></script>
     <script src='/static/js/china1.js'></script>
+    <script language="JavaScript">
+        function refresh()
+        {
+            window.location.reload();
+        }
+        setTimeout('refresh()', 60 * 1000); //指定1分钟刷新一次
+    </script>
 
     <script language="JavaScript">
         function startTime(){
@@ -139,8 +146,10 @@
 
     </script>
     <script type='text/javascript'>
-        var xx = ['x0', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6','x7','x8','x9','x0', 'x1', 'x2', 'x3', 'x4', 'x5','x6','x7','x8','x9'];
-        var yy = ['y0', 'y1', 'y2','y3', 'y4', 'y5', 'y6','y7','y8','y9','y0', 'y1', 'y2','y3', 'y4', 'y5', 'y6','y7','y8','y9','y0', 'y1', 'y2','y3'];
+        // var xx = ['x0', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6','x7','x8','x9','x0', 'x1', 'x2', 'x3', 'x4', 'x5','x6','x7','x8','x9'];
+        // var yy = ['y0', 'y1', 'y2','y3', 'y4', 'y5', 'y6','y7','y8','y9','y0', 'y1', 'y2','y3', 'y4', 'y5', 'y6','y7','y8','y9','y0', 'y1', 'y2','y3'];
+        var xx = ['x0', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9','x0', 'x1', 'x2', 'x3', 'x4'];
+        var yy = ['y0', 'y1', 'y2', 'y3', 'y4', 'y5', 'y6', 'y7', 'y8', 'y9','y0', 'y1', 'y2', 'y3', 'y4', 'y5', 'y6', 'y7'];
         // var data = [[0,4,'设备名称：设备1 <br> 资产编号：ABC123'],[3,3,1],[2,6,1],[5,7,1],[0,8,1],[15,9,2]];
         // var data1 = [[0,0,'设备名称：设备1 <br> 资产编号：ABC123'],[0,1,'设备2'],[0,2,'设备3'],[0,23,'设备4']];
         // var data2 = [[1,1,'设备名称：设备1 <br> 资产编号：ABC123'],[3,2,20],[6,3,20]];
@@ -332,7 +341,7 @@
                         color: '#5acde2'
                     }
                 },
-                data: [{% for date in department_name %} '{{date}}', {% endfor %}]
+                data: [{% for date in department_name1 %} '{{date}}', {% endfor %}]
             },
             series: [
                 {
@@ -419,7 +428,7 @@
                         color: '#5acde2'
                     }
                 },
-                data: [{% for date in department_name %} '{{date}}', {% endfor %}]
+                data: [{% for date in department_name2 %} '{{date}}', {% endfor %}]
             },
             series: [
                 {
