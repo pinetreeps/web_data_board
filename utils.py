@@ -79,7 +79,7 @@ def get_weather(city_str):
     # url = "http://www.weather.com.cn/weather1d/101010100.shtml"
     url = "http://www.tianqi.com/{}/".format(city_str)
     # url = "http://qq.ip138.com/weather/beijing/"
-    weather_data = ['气温正常', '多云', '北风']
+    weather_data = [u'气温正常', u'多云', u'北风']
 
     whtml = getHTMLtext(url)
     # print(whtml)
@@ -96,7 +96,7 @@ def get_weather(city_str):
         weather_pattern = re.compile("<span><b>(.*?)</b>", re.S)
         weather_data[1] = weather_pattern.findall(w_info[0])[0]
 
-        wind_pattern = re.compile("<b>风向：(.*?)</b>", re.S)
+        wind_pattern = re.compile(u"<b>风向：(.*?)</b>", re.S)
         weather_data[2] = wind_pattern.findall(w_info[0])[0]
     except Exception as e:
         print("get weather data error, ", repr(e))
