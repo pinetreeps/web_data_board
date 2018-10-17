@@ -77,6 +77,6 @@ def test2():
 
 if __name__ == '__main__':
     # 线上
-    # app.run(host='0.0.0.0', port=8097, debug=True)
+    app.run(host='0.0.0.0', port=8097, debug=True)
     # 本机
-    app.run(port=8090,debug=True)
+    # app.run(port=8090,debug=True)
