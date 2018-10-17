@@ -104,17 +104,17 @@ def get_weather(city_str):
 
 
 def get_weather_img_path(weather_str):
-    if '小雨' == weather_str:
+    if u'小雨' == weather_str:
         return 'static/images/leoweather/xiaoyu.png'
-    elif '大雨' == weather_str:
+    elif u'大雨' == weather_str:
         return 'static/images/leoweather/dayu.png'
-    elif '多云' == weather_str:
+    elif u'多云' == weather_str:
         return 'static/images/leoweather/duoyun.png'
-    elif '晴' == weather_str:
+    elif u'晴' == weather_str:
         return 'static/images/leoweather/qing.png'
-    elif '阴' == weather_str:
+    elif u'阴' == weather_str:
         return 'static/images/leoweather/yin.png'
-    elif '中雨' == weather_str:
+    elif u'中雨' == weather_str:
         return 'static/images/leoweather/zhongyu.png'
     else:
         return 'static/images/leoweather/duoyun.png'
