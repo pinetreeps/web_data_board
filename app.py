@@ -58,6 +58,7 @@ def test2():
 
     # 读取bar2 年平均运行有效机时 vs 年平均共享服务机时
     RETY_vs_SSTY = utils.deal_api_data_for_bar2()
+    print(RETY_vs_SSTY[2])
 
     # 获取天气数据以及图片
     weather_data = utils.get_weather('beijing')
@@ -77,6 +78,6 @@ def test2():
 
 if __name__ == '__main__':
     # 线上
-    app.run(host='0.0.0.0', port=8097, debug=True)
+    # app.run(host='0.0.0.0', port=8097, debug=True)
     # 本机
-    # app.run(port=8090,debug=True)
+    app.run(port=8090,debug=True)

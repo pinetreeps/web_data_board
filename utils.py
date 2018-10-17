@@ -164,7 +164,7 @@ def deal_api_data_for_bar2():
     running_effective_time = get_api_data(config.API_URL_RUNNING_EFFECTIVE_TIME, config.BACKUP_DATA_RUNNING_EFFECTIVE_TIME)
     shared_service_time = get_api_data(config.API_URL_SHARE_SERVICE_TIME, config.BACKUP_DATA_SHARE_SERVICE_TIME)
     # print(running_effective_time)
-    # print(shared_service_time)
+    print(shared_service_time)
     for data1 in running_effective_time:
         return_lists[0].append(data1.get('NAME'))
         return_lists[1].append(data1.get('VALUE'))
@@ -188,13 +188,13 @@ def get_center_data():
 if __name__ == '__main__':
 
     print(get_center_data())
-    exit()
+    # exit()
 
     # 测试3
     aa = get_api_data(config.API_URL_CENTER_DISPLAY, [])
     print(type(aa))
     print(aa)
-    exit()
+    # exit()
 
     bb = get_api_data(config.API_URL_AVG_DEVICE_USING_RATE,[])
     print(len(bb))
@@ -213,6 +213,9 @@ if __name__ == '__main__':
     ee = deal_api_data_for_bar2()
     for e in range(len(ee[0])):
         print(e, ee[0][e], ee[1][e], ee[2][e])
+
+    for e2 in ee:
+        print(e2)
 
     exit()
 
