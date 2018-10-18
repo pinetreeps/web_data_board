@@ -2,12 +2,15 @@
 {% block page_content %}
     <div class="col-sm-12">
         <!--左边栏 两个柱状图 -->
-        <div id="bar" class="col-sm-3" style="height: 890px">
+        <div id="bar" class="col-sm-3" style="height: 920px">
+            <div class="col-sm-12" style="height: 30px"></div>
+
             <div id="bar1" class="col-sm-12" style="height: 445px"></div>
             <div id="bar2" class="col-sm-12" style="height: 445px"></div>
         </div>
         <!--中间区域 标题、地图、时间、监控覆盖率、设备使用率 -->
-        <div class="col-sm-6" style="height: 890px; background-color:#17405f">
+        <div class="col-sm-6" style="height: 920px; background-color:#17405f">
+            <div class="col-sm-12" style="height: 30px"></div>
             <div class="col-sm-12" style="height: 60px">
                 <h2 class="text-center" style="color: #5acde2; font-weight: lighter" >中国检验检疫科学研究院大型科研仪器动态监控系统</h2>
                 <!--<h2 class="text-center" style="color: #5acde2;" >DATA MONITOR VIEW BOARD</h2>-->
@@ -41,7 +44,8 @@
             </div>
 
         </div>
-        <div id="bar" class="col-sm-3" style="height: 890px">
+        <div id="bar" class="col-sm-3" style="height: 920px">
+            <div class="col-sm-12" style="height: 30px"></div>
             <!--右边栏 散点图、饼图 -->
             <div id="device_monitor" class="col-sm-12" style="height: 600px"></div>
             <div id="pie" class="col-sm-12" style="height: 290px"></div>
@@ -103,7 +107,7 @@
     <script type='text/javascript'>
             option = {
             title : {
-                text: '比例图',
+                text: '全年运行机时',
                 x:'center',
                 textStyle: {//标题颜色
                         color: '#5acde2',
@@ -118,7 +122,7 @@
                 show: false,
                 orient: 'vertical',
                 left: 'left',
-                data: ['部门1','部门2','部门3'],
+                data: ['运行','待机','关机'],
                 textStyle: {//标题颜色
                         color: '#5acde2'
                 }
@@ -211,7 +215,7 @@
                 {
                 name: '运行',
                 type: 'scatter',
-                symbolSize: 10,
+                symbolSize: 12,
                 data: data,
                 label: {
                     normal: {
@@ -230,7 +234,7 @@
                 {
                 name: '待机',
                 type: 'scatter',
-                symbolSize: 10,
+                symbolSize: 12,
                 data: data1,
                 label: {
                     normal: {
@@ -249,7 +253,7 @@
                 {
                 name: '关机',
                 type: 'scatter',
-                symbolSize: 10,
+                symbolSize: 12,
                 data: data2,
                 label: {
                     normal: {
@@ -268,7 +272,7 @@
                 {
                 name: '未部署',
                 type: 'scatter',
-                symbolSize: 10,
+                symbolSize: 12,
                 data: data3,
                 label: {
                     normal: {

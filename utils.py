@@ -177,8 +177,8 @@ def deal_api_data_for_bar2():
 
 def get_center_data():
     center_data = get_api_data(config.API_URL_CENTER_DISPLAY, config.BACKUP_DATA_CENTER_DISPLAY)
-    print(center_data)
-    print(type(center_data[0].get('监控覆盖率')))
+    # print(center_data)
+    # print(type(center_data[0].get('监控覆盖率')))
     return_data = []
     return_data.append(round(center_data[0].get(u'监控覆盖率'),1))
     return_data.append(round(center_data[1].get(u'设备使用率'),1))
